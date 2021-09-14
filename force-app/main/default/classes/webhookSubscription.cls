@@ -13,8 +13,8 @@ global with sharing class webhookSubscription {
      
      try {
      //request 
-     RestRequest request =RestContext.request;
-     RestResponse response= RestContext.response;
+    // RestRequest request =RestContext.request;
+    // RestResponse response= RestContext.response;
      
      //Blob requestBody = request.requestBody;
     }catch(Exception e){
