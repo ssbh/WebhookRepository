@@ -146,12 +146,6 @@ global with sharing class webhookSubscription {
 		public String username;	//ssbh
 	}
 
-    /*class cls_added {
-	}
-	class cls_removed {
-	}
-	class cls_modified {
-    } */
     // wrapper class to send the sucess or failure message to Github 
     public class SFDCResponse {
         public String key ;
