@@ -2,7 +2,7 @@
  * @description       : Class to handle webhooks form GitHub 
  * @author            : Sam Belete
  * @group             : 
- * @last modified on  : 09-17-2021
+ * @last modified on  : 09-18-2021
  * @last modified by  : Sam Belete
 **/
 @RestResource (urlMapping='/api/Webhook/incoming/pushDetail/*')
@@ -63,7 +63,7 @@ global with sharing class webhookSubscription {
 
 
     //create github push detail record based on the recevied detail 
-    Github_Push_Detail__c  githubPushedDetail = new Github_Push_Detail__c();
+    Github_Push_Detail__c  githubPushedDetail = new Github_Push_Detail__c(); //custom object 
     githubPushedDetail.Name = pusherDetail != null ? pusherDetail.name: null ;
     githubPushedDetail.Email__c = pusherDetail != null ? pusherDetail.email: null ;
     githubPushedDetail.Commit_Message__c = headCommitDetail != null ? headCommitDetail.message: null ;
@@ -82,9 +82,10 @@ global with sharing class webhookSubscription {
 
     else {
         //set response unauthorized 
+        system.debug('it directly comes in else block');
         response.statusCode = 401;
-        response.responseBody = Blob.valueOf(JSON.serialize(new SFDCResponse('Failure','Not a valid Sender')));  
-
+        response.responseBody = Blob.valueOf(JSON.serialize('Failure :Not a valid Sender'));  
+        //you can send the message like this or just call sfdcresponse class for it.
     }
      
     
@@ -147,10 +148,10 @@ global with sharing class webhookSubscription {
 	}
 
     // wrapper class to send the sucess or failure message to Github 
-    public class SFDCResponse {
+    class SFDCResponse {
         public String key ;
         public String value ;
-        public SFDCResponse(String key, String value){
+        public SFDCResponse(String k, String v){
             key = key;
             value = value;
         }
